@@ -1,17 +1,15 @@
-const express = require("express")
-const mongoose = require ("mongoose")
 require("dotenv").config()
 
-const holaRoutes =require("./routes/holaMundo.routes")
+const express = require("express")
+const mongoose = require ("mongoose")
+
 const app = express()
-const PORT = process.env.PORT || 3006
+const entregasRoutes = require("./routes/entregas.routes")
+const PORT = process.env.PORT || 3000
 
 app.set("port",PORT)
-app.use("/api/hola",holaRoutes)
-
-app.get("/",(req,res)=>{
-    res.send("Hola mundo")
-})
+app.use(express.json())
+app.use("/api/entregas",entregasRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
 .then(console.log("Base de datos"))
